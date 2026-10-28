@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <!-- Load QRCode.js for generating the QR code automatically -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- Load a nice font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --text-color: #f8fafc;
+      --card-bg: #1e293b;
+      --accent: #38bdf8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p.subtitle {
+      color: #94a3b8;
+      margin-bottom: 2rem;
+    }
+
+    /* --- FLIP CARD STYLES --- */
+    .card-container {
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+      perspective: 1000px; /* Gives the 3D effect */
+    }
+
+    .business-card {
+      width: 350px;
+      height: 200px;
+      position: relative;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    /* Class added via JS when clicked */
+    .business-card.is-flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .card-front {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid #334155;
+    }
+
+    .card-front h2 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+
+    .card-front p {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin-bottom: 1rem;
+    }
+
+    .card-front .role {
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #94a3b8;
+    }
+
+    .card-back {
+      background: #1e293b;
+      border: 1px solid var(--accent);
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .qr-container {
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .contact-links a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .contact-links a:hover {
+      color: var(--accent);
+    }
+
+    .instruction {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 1rem;
+    }
+
+    /* --- PORTFOLIO CONTENT --- */
+    .content-section {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .content-section h2 {
+      border-bottom: 2px solid #334155;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #334155;
+    }
+
+    .project-card h3 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Juan Dela Cruz</h1>
+    <p class="subtitle">IT Student | Aspiring Web Developer</p>
+  </header>
+
+  <!-- FLIPPABLE BUSINESS CARD SECTION -->
+  <div class="card-container">
+    <div class="business-card" id="myCard" onclick="flipCard()">
+      
+      <!-- FRONT OF CARD -->
+      <div class="card-face card-front">
+        <h2>Juan Dela Cruz</h2>
+        <p>BS Information Technology</p>
+        <span class="role">Polytechnic University of the Philippines</span>
+      </div>
+
+      <!-- BACK OF CARD (Contact & QR) -->
+      <div class="card-face card-back">
+        <div class="qr-container" id="qrcode"></div>
+        <div class="contact-links">
+          <a href="mailto:juan@example.com">📧 juan@example.com</a>
+          <a href="https://github.com/juandc" target="_blank">💻 github.com/juandc</a>
+          <a href="https://linkedin.com/in/juandc" target="_blank">🔗 linkedin/juandc</a>
+          <a href="tel:+639000000000">📱 +63 900 000 0000</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <p class="instruction">Tap or click the card to flip it and scan my QR code.</p>
+
+  <!-- ABOUT & PROJECTS SECTION -->
+  <section class="content-section">
+    <h2>About Me</h2>
+    <p>I am a passionate IT student currently focused on web development, system integration, and building modern, user-friendly interfaces. I love turning complex problems into simple, beautiful designs.</p>
+  </section>
+
+  <section class="content-section">
+    <h2>Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Project One</h3>
+        <p>A web-based attendance system using HTML, CSS, and vanilla JavaScript.</p>
+      </div>
+      <div class="project-card">
+        <h3>Project Two</h3>
+        <p>An interactive portfolio featuring a 3D-flipping digital business card.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // 1. Function to flip the card on click
+    function flipCard() {
+      const card = document.getElementById('myCard');
+      card.classList.toggle('is-flipped');
+    }
+
+    // 2. Generate the QR Code dynamically
+    // Replace the text below with whatever URL or contact info you want the QR code to hold
+    const qrContent = "https://your-portfolio-link.github.io"; 
+    
+    new QRCode(document.getElementById("qrcode"), {
+      text: qrContent,
+      width: 100,
+      height: 100,
+      colorDark : "#000000",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.L
+    });
+  </script>
+</body>
+</html>
