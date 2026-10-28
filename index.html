@@ -279,6 +279,20 @@
       margin-bottom: 0.5rem;
     }
 
+    .box a.cert-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      border-bottom: 1px solid transparent;
+      transition: border-bottom-color 0.3s;
+    }
+
+    .box a.cert-link:hover {
+      border-bottom-color: var(--accent);
+    }
+
     ul {
       margin-left: 1.5rem;
       color: var(--text-muted);
@@ -329,7 +343,7 @@
     <section class="hero-section" id="home">
       <h1>Francis Samuel D. Montes</h1>
       <p class="subtitle">3rd Year BSIT Undergraduate</p>
-      <p>[A short 1-2 sentence introduction about who you are and where you are located.]</p>
+      <p>Information Technology student based in the Philippines, combining technical foundations with strategic application.</p>
 
       <div class="card-container">
         <div class="business-card" id="myCard">
@@ -381,16 +395,16 @@
     <!-- ABOUT SECTION -->
     <section id="about">
       <h2>About</h2>
-      <p>[Write a paragraph about your background, what you are currently studying or doing, and what drives your interest in your field.]</p>
+      <p>I am a third-year Information Technology student aiming to bridge the gap between technical development and business strategy. I am particularly interested in how modern technologies can optimize enterprise processes and drive growth.</p>
       
       <div class="grid">
         <div class="box">
-          <h3>[Education / Goal 1]</h3>
-          <p>[Details...]</p>
+          <h3>Academic Focus</h3>
+          <p>Currently studying at Polytechnic University of the Philippines, focusing on systems integration, database management, and emerging web technologies.</p>
         </div>
         <div class="box">
-          <h3>[Scholarship / Goal 2]</h3>
-          <p>[Details...]</p>
+          <h3>Research Interest</h3>
+          <p>Exploring the integration of artificial intelligence into business marketing to enhance operational efficiency and strategic outreach.</p>
         </div>
       </div>
     </section>
@@ -398,25 +412,15 @@
     <!-- EXPERIENCE & EDUCATION SECTION -->
     <section id="experience">
       <h2>Experience & Education</h2>
-      <p>[A summary sentence about your work and studies.]</p>
+      <p>A summary of my academic journey and technical foundation.</p>
       
       <div class="box" style="margin-bottom: 1rem;">
-        <span class="date">[Duration / Date]</span>
-        <h3>[Your Job Title or Role]</h3>
-        <p style="color: var(--text-color);">[Company or Organization]</p>
+        <span class="date">Ongoing</span>
+        <h3>Bachelor of Science in Information Technology</h3>
+        <p style="color: var(--text-color);">Polytechnic University of the Philippines</p>
         <ul>
-          <li>[Responsibility or achievement 1]</li>
-          <li>[Responsibility or achievement 2]</li>
-        </ul>
-      </div>
-
-      <div class="box">
-        <span class="date">[Duration / Date]</span>
-        <h3>[Your Degree]</h3>
-        <p style="color: var(--text-color);">[Your University]</p>
-        <ul>
-          <li>[Academic highlight 1]</li>
-          <li>[Academic highlight 2]</li>
+          <li>Third-year student developing skills in object-oriented programming, database administration, and system design.</li>
+          <li>Balancing theoretical computer science concepts with hands-on technical application.</li>
         </ul>
       </div>
     </section>
@@ -424,25 +428,25 @@
     <!-- PROJECTS SECTION -->
     <section id="projects">
       <h2>Projects</h2>
-      <p>[Selected academic and personal work.]</p>
+      <p>Selected academic coursework and active developments.</p>
       
       <div class="grid">
         <div class="box">
-          <span class="date">[Project Date / Context]</span>
-          <h3>[Project Name 1]</h3>
-          <p>[Brief description of the project and its purpose.]</p>
+          <span class="date">Research Concept</span>
+          <h3>AI in Business Marketing</h3>
+          <p>Capstone research concept focused on integrating artificial intelligence into business marketing frameworks, rather than analyzing user behavior problems.</p>
           <ul>
-            <li>[Feature or technology used]</li>
-            <li>[Feature or technology used]</li>
+            <li>Strategic Implementation</li>
+            <li>Process Optimization</li>
           </ul>
         </div>
         <div class="box">
-          <span class="date">[Project Date / Context]</span>
-          <h3>[Project Name 2]</h3>
-          <p>[Brief description of the project and its purpose.]</p>
+          <span class="date">Development Project</span>
+          <h3>Student Records Management</h3>
+          <p>A CRUD-based web application designed to handle standard institutional recordkeeping and database queries.</p>
           <ul>
-            <li>[Feature or technology used]</li>
-            <li>[Feature or technology used]</li>
+            <li>PHP & MySQL</li>
+            <li>HTML & CSS</li>
           </ul>
         </div>
       </div>
@@ -451,18 +455,21 @@
     <!-- CERTIFICATIONS SECTION -->
     <section id="certifications">
       <h2>Certifications</h2>
-      <p>[Summary of your professional certificates.]</p>
+      <p>Professional certificates and foundational training.</p>
       
       <div class="grid">
         <div class="box">
-          <span class="date">[Issuing Organization]</span>
-          <h3>[Certificate Name 1]</h3>
-          <p>[Brief description of what the certificate covers.]</p>
+          <span class="date">Issued on: October 18, 2026</span>
+          <h3>Introduction to Cloud (CC0101EN)</h3>
+          <p>Provided by IBM via CognitiveClass.ai. Introduces core cloud computing concepts and service models.</p>
+          <a href="https://courses.cognitiveclass.ai/certificates/0608241458d641c8a5bea1da0ea03596" target="_blank" class="cert-link">Verify this certificate ↗</a>
         </div>
+        
+        <!-- Placeholder for future certifications -->
         <div class="box">
-          <span class="date">[Issuing Organization]</span>
-          <h3>[Certificate Name 2]</h3>
-          <p>[Brief description of what the certificate covers.]</p>
+          <span class="date">[Date]</span>
+          <h3>[Future Certification]</h3>
+          <p>[Description of skills acquired or topics covered in this training.]</p>
         </div>
       </div>
     </section>
@@ -470,23 +477,25 @@
     <!-- EXPERTISE SECTION -->
     <section id="expertise">
       <h2>Expertise</h2>
-      <p>[Tools and skills you use regularly.]</p>
+      <p>Core competencies, programming languages, and development environments.</p>
       
       <div class="grid">
         <div class="box">
-          <h3>Technical</h3>
+          <h3>Technical Skills</h3>
           <ul>
-            <li>[Skill 1]</li>
-            <li>[Skill 2]</li>
-            <li>[Skill 3]</li>
+            <li>Java, Python, C, PHP</li>
+            <li>SQL / MySQL Database Administration</li>
+            <li>HTML / CSS Web Development</li>
+            <li>Network Administration</li>
           </ul>
         </div>
         <div class="box">
-          <h3>Tools & Platforms</h3>
+          <h3>Tools & Environments</h3>
           <ul>
-            <li>[Tool 1]</li>
-            <li>[Tool 2]</li>
-            <li>[Tool 3]</li>
+            <li>Visual Studio Code & Eclipse IDE</li>
+            <li>XAMPP & MySQL Workbench</li>
+            <li>Cisco Packet Tracer</li>
+            <li>Git & GitHub</li>
           </ul>
         </div>
       </div>
@@ -495,7 +504,7 @@
     <!-- CONTACT SECTION -->
     <section id="contact">
       <h2>Contact</h2>
-      <p>[A brief sentence welcoming opportunities or connections.]</p>
+      <p>I am open to connecting regarding technology, business marketing integration, and collaborative projects.</p>
       <div class="box">
         <ul>
           <li><strong>Email:</strong> <a href="mailto:francissamuelmontes@gmail.com" style="color: var(--accent);">francissamuelmontes@gmail.com</a></li>
@@ -507,7 +516,7 @@
   </main>
 
   <footer>
-    <p>© 2026 Francis Samuel D. Montes. [Your Location].</p>
+    <p>© 2026 Francis Samuel D. Montes. Philippines.</p>
   </footer>
 
   <script>
