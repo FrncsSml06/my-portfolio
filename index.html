@@ -283,12 +283,13 @@
       <p>[A short 1-2 sentence introduction about who you are and where you are located.]</p>
 
       <div class="card-container">
-        <div class="business-card" id="myCard" onclick="flipCard()">
+        <!-- Removed onclick attribute here, script handles it now -->
+        <div class="business-card" id="myCard">
           <!-- FRONT -->
           <div class="card-face card-front">
             <h3>Francis Samuel D. Montes</h3>
             <p class="role">BSIT Undergraduate</p>
-            <span class="school">[Your University]</span>
+            <span class="school">Polytechnic University of the Philippines</span>
           </div>
           <!-- BACK -->
           <div class="card-face card-back">
@@ -438,12 +439,37 @@
   </footer>
 
   <script>
-    function flipCard() {
-      const card = document.getElementById('myCard');
-      card.classList.toggle('is-flipped');
+    // 1. Select the card and add the flip click event
+    const card = document.getElementById('myCard');
+    if (card) {
+      card.addEventListener('click', function() {
+        card.classList.toggle('is-flipped');
+      });
     }
 
+    // 2. Stop the card from flipping back when you try to click your links!
+    const links = document.querySelectorAll('.contact-links a');
+    links.forEach(link => {
+      link.addEventListener('click', function(event) {
+        event.stopPropagation();
+      });
+    });
+
+    // 3. Generate the QR Code
     // Replace this URL with your actual Vercel link once deployed
-    const qrContent = "https://my-portfolio-rosy-mu-70.vercel.app"; 
+    const qrContent = "https://[your-vercel-project-name].vercel.app"; 
     
-    new QRCode(document.getElementById("qrcode"),
+    const qrContainer = document.getElementById("qrcode");
+    if (qrContainer) {
+      new QRCode(qrContainer, {
+        text: qrContent,
+        width: 100,
+        height: 100,
+        colorDark : "#0f172a",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.L
+      });
+    }
+  </script>
+</body>
+</html>
