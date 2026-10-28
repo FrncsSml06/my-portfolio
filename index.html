@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
-  <!-- Load QRCode.js for generating the QR code automatically -->
+  <title>[Your Name] - Portfolio</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <!-- Load a nice font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
       --bg-color: #0f172a;
       --text-color: #f8fafc;
+      --text-muted: #94a3b8;
       --card-bg: #1e293b;
       --accent: #38bdf8;
+      --border-color: #334155;
     }
 
     * {
@@ -24,33 +24,103 @@
       font-family: 'Inter', sans-serif;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background-color: var(--bg-color);
       color: var(--text-color);
       line-height: 1.6;
     }
 
+    /* --- NAVIGATION --- */
     header {
-      text-align: center;
-      padding: 4rem 1rem 2rem;
+      position: sticky;
+      top: 0;
+      background-color: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    h1 {
-      font-size: 2.5rem;
+    .logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-decoration: none;
+      color: var(--text-color);
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* --- MAIN LAYOUT --- */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    section {
+      margin-bottom: 5rem;
+      padding-top: 4rem; /* Offset for sticky header */
+      margin-top: -4rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-color);
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    /* --- HERO & BUSINESS CARD --- */
+    .hero-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-top: 4rem;
+      margin-bottom: 6rem;
+    }
+
+    .hero-section h1 {
+      font-size: 3rem;
       margin-bottom: 0.5rem;
     }
 
-    p.subtitle {
-      color: #94a3b8;
+    .hero-section .subtitle {
+      font-size: 1.2rem;
+      color: var(--accent);
       margin-bottom: 2rem;
     }
 
-    /* --- FLIP CARD STYLES --- */
     .card-container {
-      display: flex;
-      justify-content: center;
-      padding: 2rem;
-      perspective: 1000px; /* Gives the 3D effect */
+      perspective: 1000px;
+      margin: 2rem 0;
     }
 
     .business-card {
@@ -62,7 +132,6 @@
       cursor: pointer;
     }
 
-    /* Class added via JS when clicked */
     .business-card.is-flipped {
       transform: rotateY(180deg);
     }
@@ -82,31 +151,30 @@
 
     .card-front {
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      border: 1px solid #334155;
+      border: 1px solid var(--border-color);
     }
 
-    .card-front h2 {
+    .card-front h3 {
       font-size: 1.5rem;
       color: var(--accent);
-      margin-bottom: 0.2rem;
     }
 
-    .card-front p {
+    .card-front p.role {
       font-size: 0.9rem;
       color: #cbd5e1;
       margin-bottom: 1rem;
     }
 
-    .card-front .role {
+    .card-front .school {
       font-weight: 600;
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: #94a3b8;
+      color: var(--text-muted);
     }
 
     .card-back {
-      background: #1e293b;
+      background: var(--card-bg);
       border: 1px solid var(--accent);
       transform: rotateY(180deg);
       display: flex;
@@ -131,124 +199,258 @@
       color: var(--text-color);
       text-decoration: none;
       font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: color 0.3s ease;
-    }
-
-    .contact-links a:hover {
-      color: var(--accent);
     }
 
     .instruction {
-      text-align: center;
       font-size: 0.85rem;
-      color: #64748b;
-      margin-top: 1rem;
+      color: var(--text-muted);
     }
 
-    /* --- PORTFOLIO CONTENT --- */
-    .content-section {
-      max-width: 800px;
-      margin: 3rem auto;
-      padding: 0 2rem;
-    }
-
-    .content-section h2 {
-      border-bottom: 2px solid #334155;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .project-grid {
+    /* --- GRID & LIST STYLES (For Projects, Experience, etc.) --- */
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
     }
 
-    .project-card {
+    .box {
       background: var(--card-bg);
       padding: 1.5rem;
       border-radius: 8px;
-      border: 1px solid #334155;
+      border: 1px solid var(--border-color);
     }
 
-    .project-card h3 {
+    .box h3 {
       color: var(--accent);
       margin-bottom: 0.5rem;
+    }
+
+    .box span.date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    ul {
+      margin-left: 1.5rem;
+      color: var(--text-muted);
+    }
+    
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Nav */
+    @media (max-width: 600px) {
+      nav {
+        display: none; /* Can be upgraded to a hamburger menu later */
+      }
+      .business-card {
+        width: 300px;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- NAVIGATION -->
   <header>
-    <h1>Juan Dela Cruz</h1>
-    <p class="subtitle">IT Student | Aspiring Web Developer</p>
+    <a href="#" class="logo">[Your Name]</a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
-  <!-- FLIPPABLE BUSINESS CARD SECTION -->
-  <div class="card-container">
-    <div class="business-card" id="myCard" onclick="flipCard()">
-      
-      <!-- FRONT OF CARD -->
-      <div class="card-face card-front">
-        <h2>Juan Dela Cruz</h2>
-        <p>BS Information Technology</p>
-        <span class="role">Polytechnic University of the Philippines</span>
-      </div>
+  <main>
+    <!-- HERO SECTION & BUSINESS CARD -->
+    <section class="hero-section" id="home">
+      <h1>[Your Full Name]</h1>
+      <p class="subtitle">[Your Main Headline / Aspiration]</p>
+      <p>[A short 1-2 sentence introduction about who you are and where you are located.]</p>
 
-      <!-- BACK OF CARD (Contact & QR) -->
-      <div class="card-face card-back">
-        <div class="qr-container" id="qrcode"></div>
-        <div class="contact-links">
-          <a href="mailto:juan@example.com">📧 juan@example.com</a>
-          <a href="https://github.com/juandc" target="_blank">💻 github.com/juandc</a>
-          <a href="https://linkedin.com/in/juandc" target="_blank">🔗 linkedin/juandc</a>
-          <a href="tel:+639000000000">📱 +63 900 000 0000</a>
+      <div class="card-container">
+        <div class="business-card" id="myCard" onclick="flipCard()">
+          <!-- FRONT -->
+          <div class="card-face card-front">
+            <h3>[Your Name]</h3>
+            <p class="role">[Your Degree or Current Role]</p>
+            <span class="school">[Your University or Company]</span>
+          </div>
+          <!-- BACK -->
+          <div class="card-face card-back">
+            <div class="qr-container" id="qrcode"></div>
+            <div class="contact-links">
+              <a href="mailto:[your-email@example.com]">📧 [Your Email]</a>
+              <a href="[Your GitHub URL]" target="_blank">💻 [Your GitHub]</a>
+              <a href="[Your LinkedIn URL]" target="_blank">🔗 [Your LinkedIn]</a>
+              <a href="tel:[Your Phone]">📱 [Your Phone]</a>
+            </div>
+          </div>
         </div>
       </div>
+      <p class="instruction">Select the card to see my contact details.</p>
+    </section>
 
-    </div>
-  </div>
-  <p class="instruction">Tap or click the card to flip it and scan my QR code.</p>
-
-  <!-- ABOUT & PROJECTS SECTION -->
-  <section class="content-section">
-    <h2>About Me</h2>
-    <p>I am a passionate IT student currently focused on web development, system integration, and building modern, user-friendly interfaces. I love turning complex problems into simple, beautiful designs.</p>
-  </section>
-
-  <section class="content-section">
-    <h2>Projects</h2>
-    <div class="project-grid">
-      <div class="project-card">
-        <h3>Project One</h3>
-        <p>A web-based attendance system using HTML, CSS, and vanilla JavaScript.</p>
+    <!-- ABOUT SECTION -->
+    <section id="about">
+      <h2>About</h2>
+      <p>[Write a paragraph about your background, what you are currently studying or doing, and what drives your interest in your field.]</p>
+      
+      <div class="grid">
+        <div class="box">
+          <h3>[Education / Goal 1]</h3>
+          <p>[Details...]</p>
+        </div>
+        <div class="box">
+          <h3>[Scholarship / Goal 2]</h3>
+          <p>[Details...]</p>
+        </div>
       </div>
-      <div class="project-card">
-        <h3>Project Two</h3>
-        <p>An interactive portfolio featuring a 3D-flipping digital business card.</p>
+    </section>
+
+    <!-- EXPERIENCE & EDUCATION SECTION -->
+    <section id="experience">
+      <h2>Experience & Education</h2>
+      <p>[A summary sentence about your work and studies.]</p>
+      
+      <div class="box" style="margin-bottom: 1rem;">
+        <span class="date">[Duration / Date]</span>
+        <h3>[Your Job Title or Role]</h3>
+        <p style="color: var(--text-color);">[Company or Organization]</p>
+        <ul>
+          <li>[Responsibility or achievement 1]</li>
+          <li>[Responsibility or achievement 2]</li>
+        </ul>
       </div>
-    </div>
-  </section>
+
+      <div class="box">
+        <span class="date">[Duration / Date]</span>
+        <h3>[Your Degree]</h3>
+        <p style="color: var(--text-color);">[Your University]</p>
+        <ul>
+          <li>[Academic highlight 1]</li>
+          <li>[Academic highlight 2]</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <p>[Selected academic and personal work.]</p>
+      
+      <div class="grid">
+        <div class="box">
+          <span class="date">[Project Date / Context]</span>
+          <h3>[Project Name 1]</h3>
+          <p>[Brief description of the project and its purpose.]</p>
+          <ul>
+            <li>[Feature or technology used]</li>
+            <li>[Feature or technology used]</li>
+          </ul>
+        </div>
+        <div class="box">
+          <span class="date">[Project Date / Context]</span>
+          <h3>[Project Name 2]</h3>
+          <p>[Brief description of the project and its purpose.]</p>
+          <ul>
+            <li>[Feature or technology used]</li>
+            <li>[Feature or technology used]</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS SECTION -->
+    <section id="certifications">
+      <h2>Certifications</h2>
+      <p>[Summary of your professional certificates.]</p>
+      
+      <div class="grid">
+        <div class="box">
+          <span class="date">[Issuing Organization]</span>
+          <h3>[Certificate Name 1]</h3>
+          <p>[Brief description of what the certificate covers.]</p>
+        </div>
+        <div class="box">
+          <span class="date">[Issuing Organization]</span>
+          <h3>[Certificate Name 2]</h3>
+          <p>[Brief description of what the certificate covers.]</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERTISE SECTION -->
+    <section id="expertise">
+      <h2>Expertise</h2>
+      <p>[Tools and skills you use regularly.]</p>
+      
+      <div class="grid">
+        <div class="box">
+          <h3>Technical</h3>
+          <ul>
+            <li>[Skill 1]</li>
+            <li>[Skill 2]</li>
+            <li>[Skill 3]</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>Tools & Platforms</h3>
+          <ul>
+            <li>[Tool 1]</li>
+            <li>[Tool 2]</li>
+            <li>[Tool 3]</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>[A brief sentence welcoming opportunities or connections.]</p>
+      <div class="box">
+        <ul>
+          <li><strong>Email:</strong> <a href="mailto:[your-email@example.com]" style="color: var(--accent);">[your-email@example.com]</a></li>
+          <li><strong>LinkedIn:</strong> <a href="[Your LinkedIn URL]" target="_blank" style="color: var(--accent);">[Your Profile Name]</a></li>
+          <li><strong>GitHub:</strong> <a href="[Your GitHub URL]" target="_blank" style="color: var(--accent);">[Your Username]</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 [Your Name]. [Your Location].</p>
+  </footer>
 
   <script>
-    // 1. Function to flip the card on click
     function flipCard() {
       const card = document.getElementById('myCard');
       card.classList.toggle('is-flipped');
     }
 
-    // 2. Generate the QR Code dynamically
-    // Replace the text below with whatever URL or contact info you want the QR code to hold
-    const qrContent = "https://my-portfolio-rosy-mu-70.vercel.app/"; 
+    // Replace this URL with your actual Vercel link once deployed
+    const qrContent = "https://my-portfolio-rosy-mu-70.vercel.app"; 
     
     new QRCode(document.getElementById("qrcode"), {
       text: qrContent,
       width: 100,
       height: 100,
-      colorDark : "#000000",
+      colorDark : "#0f172a",
       colorLight : "#ffffff",
       correctLevel : QRCode.CorrectLevel.L
     });
