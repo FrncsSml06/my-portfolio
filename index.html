@@ -80,7 +80,7 @@
 
     section {
       margin-bottom: 5rem;
-      padding-top: 4rem; /* Offset for sticky header */
+      padding-top: 4rem;
       margin-top: -4rem;
     }
 
@@ -121,11 +121,13 @@
     .card-container {
       perspective: 1000px;
       margin: 2rem 0;
+      display: flex;
+      justify-content: center;
     }
 
     .business-card {
-      width: 350px;
-      height: 200px;
+      width: 480px; /* Widened to fit the table layout */
+      height: 250px;
       position: relative;
       transition: transform 0.8s;
       transform-style: preserve-3d;
@@ -142,71 +144,116 @@
       height: 100%;
       backface-visibility: hidden;
       border-radius: 12px;
-      padding: 1.5rem;
       box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
     }
 
+    /* --- CARD FRONT --- */
     .card-front {
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem;
     }
 
     .card-front h3 {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       color: var(--accent);
     }
 
     .card-front p.role {
-      font-size: 0.9rem;
+      font-size: 1rem;
       color: #cbd5e1;
       margin-bottom: 1rem;
     }
 
     .card-front .school {
       font-weight: 600;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 1px;
       color: var(--text-muted);
     }
 
+    /* --- CARD BACK (Redesigned) --- */
     .card-back {
-      background: var(--card-bg);
-      border: 1px solid var(--accent);
+      background: #f4f6f8; /* Light theme matching the reference */
+      border: 1px solid #cbd5e1;
       transform: rotateY(180deg);
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
+      padding: 1.5rem;
+      gap: 1.5rem;
     }
 
     .qr-container {
       background: white;
       padding: 10px;
       border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      flex-shrink: 0; /* Prevents QR from squishing */
     }
 
-    .contact-links {
+    .back-text-content {
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 1rem;
+      width: 100%;
+      text-align: left;
     }
 
-    .contact-links a {
-      color: var(--text-color);
+    .back-header h4 {
+      font-size: 1.2rem;
+      color: #0f172a; /* Dark text */
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      font-family: 'Georgia', serif; /* Gives it that clean, elegant look */
+    }
+
+    .back-header p {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin: 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 65px 1fr;
+      gap: 0.5rem 0.5rem;
+      font-size: 0.8rem;
+      align-items: center;
+    }
+
+    .contact-label {
+      color: #64748b;
+    }
+
+    .contact-value {
+      color: #334155;
+    }
+
+    .contact-value a {
+      color: #1e293b;
       text-decoration: none;
-      font-size: 0.85rem;
+      border-bottom: 1px solid #94a3b8;
+      transition: color 0.2s, border-bottom-color 0.2s;
+    }
+
+    .contact-value a:hover {
+      color: #0284c7;
+      border-bottom-color: #0284c7;
     }
 
     .instruction {
       font-size: 0.85rem;
       color: var(--text-muted);
+      margin-top: 1rem;
     }
 
-    /* --- GRID & LIST STYLES (For Projects, Experience, etc.) --- */
+    /* --- GRID & LIST STYLES --- */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -249,20 +296,23 @@
       font-size: 0.9rem;
     }
 
-    /* Responsive Nav */
+    /* Responsive Nav & Card Scaling */
     @media (max-width: 600px) {
       nav {
         display: none; 
       }
       .business-card {
-        width: 300px;
+        transform: scale(0.75); /* Scales the card down perfectly for mobile without breaking the layout */
+        transform-origin: top center;
+      }
+      .card-container {
+        height: 200px; /* Accounts for the scaled height */
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVIGATION -->
   <header>
     <a href="#" class="logo">Francis Samuel D. Montes</a>
     <nav>
@@ -276,30 +326,52 @@
   </header>
 
   <main>
-    <!-- HERO SECTION & BUSINESS CARD -->
     <section class="hero-section" id="home">
       <h1>Francis Samuel D. Montes</h1>
       <p class="subtitle">3rd Year BSIT Undergraduate</p>
       <p>[A short 1-2 sentence introduction about who you are and where you are located.]</p>
 
       <div class="card-container">
-        <!-- Removed onclick attribute here, script handles it now -->
         <div class="business-card" id="myCard">
+          
           <!-- FRONT -->
           <div class="card-face card-front">
             <h3>Francis Samuel D. Montes</h3>
-            <p class="role">BSIT Undergraduate</p>
+            <p class="role">3rd Year BSIT Undergraduate</p>
             <span class="school">Polytechnic University of the Philippines</span>
           </div>
-          <!-- BACK -->
+          
+          <!-- BACK (Updated to match reference) -->
           <div class="card-face card-back">
             <div class="qr-container" id="qrcode"></div>
-            <div class="contact-links">
-              <a href="mailto:francissamuelmontes@gmail.com">📧 francissamuelmontes@gmail.com</a>
-              <a href="https://github.com/FrncsSml06" target="_blank">💻 FrncsSml06</a>
-              <a href="https://www.linkedin.com/in/francis-samuel-d-montes-b78a85405/" target="_blank">🔗 Francis Samuel D. Montes</a>
-              <a href="tel:09761618991">📱 09761618991</a>
+            
+            <div class="back-text-content">
+              <div class="back-header">
+                <h4>Francis Samuel D. Montes</h4>
+                <p>3rd Year BSIT Undergraduate</p>
+              </div>
+              
+              <div class="contact-grid">
+                <span class="contact-label">Email</span>
+                <span class="contact-value">
+                  <a href="mailto:francissamuelmontes@gmail.com">francissamuelmontes@gmail.com</a>
+                </span>
+
+                <span class="contact-label">LinkedIn</span>
+                <span class="contact-value">
+                  <a href="https://www.linkedin.com/in/francis-samuel-d-montes-b78a85405/" target="_blank">Francis Samuel D. Montes</a>
+                </span>
+
+                <span class="contact-label">GitHub</span>
+                <span class="contact-value">
+                  <a href="https://github.com/FrncsSml06" target="_blank">FrncsSml06</a>
+                </span>
+
+                <span class="contact-label">Phone</span>
+                <span class="contact-value">09761618991</span>
+              </div>
             </div>
+            
           </div>
         </div>
       </div>
@@ -448,7 +520,7 @@
     }
 
     // 2. Stop the card from flipping back when you try to click your links!
-    const links = document.querySelectorAll('.contact-links a');
+    const links = document.querySelectorAll('.contact-value a');
     links.forEach(link => {
       link.addEventListener('click', function(event) {
         event.stopPropagation();
@@ -457,7 +529,7 @@
 
     // 3. Generate the QR Code
     // Replace this URL with your actual Vercel link once deployed
-    const qrContent = "https://[your-vercel-project-name].vercel.app"; 
+    const qrContent = "https://my-portfolio-rosy-mu-70.vercel.app"; 
     
     const qrContainer = document.getElementById("qrcode");
     if (qrContainer) {
@@ -465,7 +537,7 @@
         text: qrContent,
         width: 100,
         height: 100,
-        colorDark : "#0f172a",
+        colorDark : "#0f172a", /* Matches the dark theme of the front of the card */
         colorLight : "#ffffff",
         correctLevel : QRCode.CorrectLevel.L
       });
